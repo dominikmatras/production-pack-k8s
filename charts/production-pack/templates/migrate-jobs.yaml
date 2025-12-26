@@ -1,0 +1,31 @@
+{{- range $name, $svc := .Values.services }}
+{{- if and $svc.enabled $svc.prismaMigrate }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ $.Release.Name }}-{{ $name }}-migrate
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      {{- if $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml $.Values.imagePullSecrets | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: migrate
+          image: "{{ $svc.image.repository }}:{{ $svc.image.tag }}"
+          command: ["sh","-lc"]
+          args: ["npx prisma migrate deploy"]
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Release.Name }}-secrets
+                  key: DATABASE_URL
+{{- end }}
+{{- end }}

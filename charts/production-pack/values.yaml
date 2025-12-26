@@ -1,0 +1,60 @@
+imagePullSecrets: []
+
+gateway:
+  enabled: true
+  host: api.production-pack.dm-tech.pl
+  image:
+    repository: ghcr.io/dominikmatras-tech/api-gateway
+    tag: dev
+  containerPort: 8080
+
+services:
+  user-service:
+    enabled: true
+    image:
+      repository: ghcr.io/dominikmatras-tech/user-service
+      tag: dev
+    containerPort: 3001
+    env:
+      PORT: '8081'
+      NODE_ENV: 'production'
+      DATABASE_URL_USER: 'postgresql://postgres:postgres@database:5432/userdb'
+    prismaMigrate: false
+
+  order-service:
+    enabled: true
+    image:
+      repository: ghcr.io/dominikmatras-tech/order-service
+      tag: dev
+    containerPort: 3002
+    env:
+      PORT: '8082'
+      NODE_ENV: 'production'
+      DATABASE_URL_ORDER: 'postgresql://postgres:postgres@database:5432/orderdb'
+    prismaMigrate: true
+
+  production-service:
+    enabled: true
+    image:
+      repository: ghcr.io/dominikmatras-tech/production-service
+      tag: dev
+    containerPort: 3003
+    env:
+      PORT: '8083'
+      NODE_ENV: 'production'
+      DATABASE_URL_ORDER: 'postgresql://postgres:postgres@database:5432/orderdb'
+
+  report-service:
+    enabled: true
+    image:
+      repository: ghcr.io/dominikmatras-tech/report-service
+      tag: dev
+    containerPort: 3004
+    env:
+      PORT: '8084'
+      NODE_ENV: 'production'
+      DATABASE_URL_REPORT: 'postgresql://postgres:postgres@database:5432/reportdb'
+    prismaMigrate: true
+
+secrets:
+  jwtSecret: 'productionpack'
