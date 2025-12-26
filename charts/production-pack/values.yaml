@@ -18,7 +18,6 @@ services:
     env:
       PORT: '8081'
       NODE_ENV: 'production'
-      DATABASE_URL_USER: 'postgresql://postgres:postgres@database:5432/userdb'
     prismaMigrate: false
     dbSecretKey: DATABASE_URL_USER
 
@@ -31,7 +30,6 @@ services:
     env:
       PORT: '8082'
       NODE_ENV: 'production'
-      DATABASE_URL_ORDER: 'postgresql://postgres:postgres@database:5432/orderdb'
     prismaMigrate: true
     dbSecretKey: DATABASE_URL_ORDER
 
@@ -44,7 +42,6 @@ services:
     env:
       PORT: '8083'
       NODE_ENV: 'production'
-      DATABASE_URL_ORDER: 'postgresql://postgres:postgres@database:5432/orderdb'
     dbSecretKey: DATABASE_URL_ORDER
 
   report-service:
@@ -56,7 +53,6 @@ services:
     env:
       PORT: '8084'
       NODE_ENV: 'production'
-      DATABASE_URL_REPORT: 'postgresql://postgres:postgres@database:5432/reportdb'
     prismaMigrate: true
     dbSecretKey: DATABASE_URL_REPORT
 
