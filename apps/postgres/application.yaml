@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: '-10'
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production-pack
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 15.5.38
+    helm:
+      values: |
+        fullnameOverride: postgres
+
+        auth:
+          enablePostgresUser: true
+          postgresPassword: postgres
+
+        primary:
+          persistence:
+            enabled: true
+            size: 20Gi
+          initdb:
+            scripts:
+              01-create-dbs.sql: |
+                CREATE DATABASE userdb;
+                CREATE DATABASE orderdb;
+                CREATE DATABASE reportdb;
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
