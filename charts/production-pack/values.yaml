@@ -14,47 +14,51 @@ services:
     image:
       repository: ghcr.io/dominikmatras-tech/user-service
       tag: dev
-    containerPort: 3001
+    containerPort: 8081
     env:
       PORT: '8081'
       NODE_ENV: 'production'
       DATABASE_URL_USER: 'postgresql://postgres:postgres@database:5432/userdb'
     prismaMigrate: false
+    dbSecretKey: DATABASE_URL_USER
 
   order-service:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/order-service
       tag: dev
-    containerPort: 3002
+    containerPort: 8082
     env:
       PORT: '8082'
       NODE_ENV: 'production'
       DATABASE_URL_ORDER: 'postgresql://postgres:postgres@database:5432/orderdb'
     prismaMigrate: true
+    dbSecretKey: DATABASE_URL_ORDER
 
   production-service:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/production-service
       tag: dev
-    containerPort: 3003
+    containerPort: 8083
     env:
       PORT: '8083'
       NODE_ENV: 'production'
       DATABASE_URL_ORDER: 'postgresql://postgres:postgres@database:5432/orderdb'
+    dbSecretKey: DATABASE_URL_ORDER
 
   report-service:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/report-service
       tag: dev
-    containerPort: 3004
+    containerPort: 8084
     env:
       PORT: '8084'
       NODE_ENV: 'production'
       DATABASE_URL_REPORT: 'postgresql://postgres:postgres@database:5432/reportdb'
     prismaMigrate: true
+    dbSecretKey: DATABASE_URL_REPORT
 
 secrets:
   jwtSecret: 'productionpack'

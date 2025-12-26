@@ -35,7 +35,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ $.Release.Name }}-secrets
-                  key: DATABASE_URL
+                  key: {{ $svc.dbSecretKey }}
           {{- range $k, $v := $svc.env }}
             - name: {{ $k }}
               value: "{{ $v }}"

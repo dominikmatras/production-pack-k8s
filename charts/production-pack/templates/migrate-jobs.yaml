@@ -26,6 +26,6 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ $.Release.Name }}-secrets
-                  key: DATABASE_URL
+                  key: {{ $svc.dbSecretKey }}
 {{- end }}
 {{- end }}

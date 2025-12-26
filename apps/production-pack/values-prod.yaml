@@ -1,11 +1,3 @@
-frontend:
-  enabled: false
-  host: production-pack.dm-tech.pl
-  image:
-    repository: ghcr.io/dominikmatras-tech/production-pack-frontend
-    tag: '30618c1'
-  servicePort: 80
-
 gateway:
   enabled: true
   host: api.production-pack.dm-tech.pl
@@ -20,11 +12,11 @@ services:
     image:
       repository: ghcr.io/dominikmatras-tech/user-service
       tag: '30618c1'
-    containerPort: 3001
+    containerPort: 8081
+    dbSecretKey: DATABASE_URL_USER
     env:
       PORT: '8081'
       NODE_ENV: 'production'
-      DATABASE_URL_USER: 'postgresql://postgres:postgres@database:5432/userdb'
     prismaMigrate: false
 
   order-service:
@@ -32,11 +24,11 @@ services:
     image:
       repository: ghcr.io/dominikmatras-tech/order-service
       tag: '30618c1'
-    containerPort: 3002
+    containerPort: 8082
+    dbSecretKey: DATABASE_URL_ORDER
     env:
       PORT: '8082'
       NODE_ENV: 'production'
-      DATABASE_URL_ORDER: 'postgresql://postgres:postgres@database:5432/orderdb'
     prismaMigrate: true
 
   production-service:
@@ -44,23 +36,30 @@ services:
     image:
       repository: ghcr.io/dominikmatras-tech/production-service
       tag: '30618c1'
-    containerPort: 3003
+    containerPort: 8083
+    dbSecretKey: DATABASE_URL_ORDER
     env:
       PORT: '8083'
       NODE_ENV: 'production'
-      DATABASE_URL_ORDER: 'postgresql://postgres:postgres@database:5432/orderdb'
+    prismaMigrate: true
 
   report-service:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/report-service
       tag: '30618c1'
-    containerPort: 3004
+    containerPort: 8084
+    dbSecretKey: DATABASE_URL_REPORT
     env:
       PORT: '8084'
       NODE_ENV: 'production'
-      DATABASE_URL_REPORT: 'postgresql://postgres:postgres@database:5432/reportdb'
     prismaMigrate: true
 
 secrets:
   jwtSecret: 'productionpack'
+  databaseUrlUser: 'postgresql://postgres:postgres@postgres.production-pack.svc.cluster.local:5432/userdb'
+  databaseUrlOrder: 'postgresql://postgres:postgres@postgres.production-pack.svc.cluster.local:5432/orderdb'
+  databaseUrlReport: 'postgresql://postgres:postgres@postgres.production-pack.svc.cluster.local:5432/reportdb'
+
+frontend:
+  enabled: false
