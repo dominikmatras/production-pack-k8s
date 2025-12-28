@@ -3,7 +3,7 @@ gateway:
   host: api.production-pack.dm-tech.pl
   image:
     repository: ghcr.io/dominikmatras-tech/api-gateway
-    tag: '22691d0'
+    tag: 'b977f28'
   containerPort: 8080
 
 services:
@@ -11,7 +11,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/user-service
-      tag: '22691d0'
+      tag: 'b977f28'
     containerPort: 8081
     dbSecretKey: DATABASE_URL_USER
     env:
@@ -23,7 +23,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/order-service
-      tag: '22691d0'
+      tag: 'b977f28'
     containerPort: 8082
     dbSecretKey: DATABASE_URL_ORDER
     env:
@@ -35,7 +35,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/production-service
-      tag: '22691d0'
+      tag: 'b977f28'
     containerPort: 8083
     dbSecretKey: DATABASE_URL_ORDER
     env:
@@ -47,7 +47,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/report-service
-      tag: '22691d0'
+      tag: 'b977f28'
     containerPort: 8084
     dbSecretKey: DATABASE_URL_REPORT
     env:
