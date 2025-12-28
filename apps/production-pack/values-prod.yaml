@@ -41,6 +41,7 @@ services:
     env:
       PORT: '8083'
       NODE_ENV: 'production'
+      API_GATEWAY_BASE_URL: 'http://production-pack-gateway'
     prismaMigrate: true
 
   report-service:
@@ -53,6 +54,7 @@ services:
     env:
       PORT: '8084'
       NODE_ENV: 'production'
+      API_GATEWAY_BASE_URL: 'http://production-pack-gateway'
     prismaMigrate: true
 
 secrets:
