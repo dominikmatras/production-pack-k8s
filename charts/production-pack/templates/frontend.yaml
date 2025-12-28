@@ -1,4 +1,4 @@
-{{- if .Values.frontend.enabled }}
+{{- if and .Values.frontend.ingress.enabled .Values.frontend.ingress.host }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
