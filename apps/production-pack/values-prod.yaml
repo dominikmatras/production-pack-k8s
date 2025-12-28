@@ -2,10 +2,12 @@ frontend:
   enabled: true
   image:
     repository: ghcr.io/dominikmatras-tech/frontend
-    tag: 'b303ca3'
+    tag: 'e3ff002'
   replicaCount: 1
   service:
     port: 80
+  config:
+    apiBaseUrl: 'https://api.production-pack.dm-tech.pl'
   ingress:
     enabled: true
     host: production-pack.dm-tech.pl
@@ -16,7 +18,7 @@ gateway:
   host: api.production-pack.dm-tech.pl
   image:
     repository: ghcr.io/dominikmatras-tech/api-gateway
-    tag: 'b303ca3'
+    tag: 'e3ff002'
   containerPort: 8080
 
 services:
@@ -24,7 +26,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/user-service
-      tag: 'b303ca3'
+      tag: 'e3ff002'
     containerPort: 8081
     dbSecretKey: DATABASE_URL_USER
     env:
@@ -36,7 +38,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/order-service
-      tag: 'b303ca3'
+      tag: 'e3ff002'
     containerPort: 8082
     dbSecretKey: DATABASE_URL_ORDER
     env:
@@ -48,7 +50,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/production-service
-      tag: 'b303ca3'
+      tag: 'e3ff002'
     containerPort: 8083
     dbSecretKey: DATABASE_URL_ORDER
     env:
@@ -61,7 +63,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/report-service
-      tag: 'b303ca3'
+      tag: 'e3ff002'
     containerPort: 8084
     dbSecretKey: DATABASE_URL_REPORT
     env:
