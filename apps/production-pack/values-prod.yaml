@@ -1,9 +1,22 @@
+frontend:
+  enabled: true
+  image:
+    repository: ghcr.io/dominikmatras-tech/frontend
+    tag: "b303ca3" 
+  replicaCount: 1
+  service:
+    port: 80
+  ingress:
+    enabled: true
+    host: production-pack.dm-tech.pl
+    tlsSecretName: production-pack-frontend-tls
+
 gateway:
   enabled: true
   host: api.production-pack.dm-tech.pl
   image:
     repository: ghcr.io/dominikmatras-tech/api-gateway
-    tag: 'b977f28'
+    tag: 'b303ca3'
   containerPort: 8080
 
 services:
@@ -11,7 +24,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/user-service
-      tag: 'b977f28'
+      tag: 'b303ca3'
     containerPort: 8081
     dbSecretKey: DATABASE_URL_USER
     env:
@@ -23,7 +36,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/order-service
-      tag: 'b977f28'
+      tag: 'b303ca3'
     containerPort: 8082
     dbSecretKey: DATABASE_URL_ORDER
     env:
@@ -35,7 +48,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/production-service
-      tag: 'b977f28'
+      tag: 'b303ca3'
     containerPort: 8083
     dbSecretKey: DATABASE_URL_ORDER
     env:
@@ -48,7 +61,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/report-service
-      tag: 'b977f28'
+      tag: 'b303ca3'
     containerPort: 8084
     dbSecretKey: DATABASE_URL_REPORT
     env:
