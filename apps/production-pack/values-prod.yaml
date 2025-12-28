@@ -2,7 +2,7 @@ frontend:
   enabled: true
   image:
     repository: ghcr.io/dominikmatras-tech/frontend
-    tag: "b303ca3" 
+    tag: 'b303ca3'
   replicaCount: 1
   service:
     port: 80
@@ -75,6 +75,3 @@ secrets:
   databaseUrlUser: 'postgresql://postgres:postgres@postgres.production-pack.svc.cluster.local:5432/userdb'
   databaseUrlOrder: 'postgresql://postgres:postgres@postgres.production-pack.svc.cluster.local:5432/orderdb'
   databaseUrlReport: 'postgresql://postgres:postgres@postgres.production-pack.svc.cluster.local:5432/reportdb'
-
-frontend:
-  enabled: false
