@@ -72,6 +72,22 @@ services:
       API_GATEWAY_BASE_URL: 'http://production-pack-gateway'
     prismaMigrate: true
 
+probes:
+  enabled: true
+  path: /health
+
+  readiness:
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    timeoutSeconds: 2
+    failureThreshold: 6
+
+  liveness:
+    initialDelaySeconds: 20
+    periodSeconds: 10
+    timeoutSeconds: 2
+    failureThreshold: 3
+
 secrets:
   jwtSecret: 'productionpack'
   databaseUrlUser: 'postgresql://postgres:postgres@postgres.production-pack.svc.cluster.local:5432/userdb'

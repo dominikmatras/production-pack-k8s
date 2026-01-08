@@ -40,5 +40,28 @@ spec:
             - name: {{ $k }}
               value: "{{ $v }}"
           {{- end }}
+          {{- $svcProbes := (default dict $svc.probes) }}
+          {{- $enabled := (hasKey $svcProbes "enabled") | ternary $svcProbes.enabled (default true $.Values.probes.enabled) }}
+          {{- $path := default (default "/health" $.Values.probes.path) $svcProbes.path }}
+
+          {{- if $enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ $path }}
+              port: {{ $svc.containerPort }}
+            initialDelaySeconds: {{ default 5 $.Values.probes.readiness.initialDelaySeconds }}
+            periodSeconds: {{ default 5 $.Values.probes.readiness.periodSeconds }}
+            timeoutSeconds: {{ default 2 $.Values.probes.readiness.timeoutSeconds }}
+            failureThreshold: {{ default 6 $.Values.probes.readiness.failureThreshold }}
+
+          livenessProbe:
+            httpGet:
+              path: {{ $path }}
+              port: {{ $svc.containerPort }}
+            initialDelaySeconds: {{ default 20 $.Values.probes.liveness.initialDelaySeconds }}
+            periodSeconds: {{ default 10 $.Values.probes.liveness.periodSeconds }}
+            timeoutSeconds: {{ default 2 $.Values.probes.liveness.timeoutSeconds }}
+            failureThreshold: {{ default 3 $.Values.probes.liveness.failureThreshold }}
+          {{- end }}
 {{- end }}
 {{- end }}
