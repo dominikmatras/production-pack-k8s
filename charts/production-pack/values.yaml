@@ -3,6 +3,7 @@ imagePullSecrets: []
 gateway:
   enabled: true
   host: api.production-pack.dm-tech.pl
+  replicaCount: 1
   image:
     repository: ghcr.io/dominikmatras-tech/api-gateway
     tag: dev
@@ -15,6 +16,7 @@ services:
       repository: ghcr.io/dominikmatras-tech/user-service
       tag: dev
     containerPort: 8081
+    replicaCount: 1
     env:
       PORT: '8081'
       NODE_ENV: 'production'
@@ -27,6 +29,7 @@ services:
       repository: ghcr.io/dominikmatras-tech/order-service
       tag: dev
     containerPort: 8082
+    replicaCount: 1
     env:
       PORT: '8082'
       NODE_ENV: 'production'
@@ -39,6 +42,7 @@ services:
       repository: ghcr.io/dominikmatras-tech/production-service
       tag: dev
     containerPort: 8083
+    replicaCount: 1
     env:
       PORT: '8083'
       NODE_ENV: 'production'
@@ -50,6 +54,7 @@ services:
       repository: ghcr.io/dominikmatras-tech/report-service
       tag: dev
     containerPort: 8084
+    replicaCount: 1
     env:
       PORT: '8084'
       NODE_ENV: 'production'
