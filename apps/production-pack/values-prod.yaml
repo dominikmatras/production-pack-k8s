@@ -2,7 +2,7 @@ frontend:
   enabled: true
   image:
     repository: ghcr.io/dominikmatras-tech/frontend
-    tag: efd3a88
+    tag: 862ad64
   replicaCount: 1
   service:
     port: 80
@@ -19,7 +19,7 @@ gateway:
   replicaCount: 1
   image:
     repository: ghcr.io/dominikmatras-tech/api-gateway
-    tag: efd3a88
+    tag: 862ad64
   containerPort: 8080
 
 services:
@@ -27,7 +27,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/user-service
-      tag: efd3a88
+      tag: 862ad64
     containerPort: 8081
     replicaCount: 2
     dbSecretKey: DATABASE_URL_USER
@@ -40,7 +40,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/order-service
-      tag: efd3a88
+      tag: 862ad64
     containerPort: 8082
     replicaCount: 2
     dbSecretKey: DATABASE_URL_ORDER
@@ -53,7 +53,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/production-service
-      tag: efd3a88
+      tag: 862ad64
     containerPort: 8083
     replicaCount: 2
     dbSecretKey: DATABASE_URL_ORDER
@@ -67,7 +67,7 @@ services:
     enabled: true
     image:
       repository: ghcr.io/dominikmatras-tech/report-service
-      tag: efd3a88
+      tag: 862ad64
     containerPort: 8084
     replicaCount: 2
     dbSecretKey: DATABASE_URL_REPORT
